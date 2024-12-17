@@ -1,0 +1,99 @@
+<---------------- CREATING TABLES ---------------->
+
+
+create table Airline(
+   airlineID Number(5) constraint AL_ID_PK PRIMARY KEY,
+   airlineHQ varchar2(25) constraint AL_HQ_NN NOT NULL,
+   airlineWebsite varchar2(25),
+   airlineName varchar2(25) constraint AL_NAME_NN NOT NULL);
+
+create table Aircraft(
+   aircraftID Number(5) constraint AC_ID_PK PRIMARY KEY,
+   aircraftModel varchar2(25) constraint AC_MDL_NN NOT NULL,
+   aircraftLastMaintenenceDate date,
+   aircraftCapacity Number(3) constraint AC_CAP_NN NOT NULL,
+   aircraftFuel Number(2) constraint AC_FS_NN NOT NULL,
+   airlineID Number(5) constraint AC_AL_FK REFERENCES Airline(airlineID) on delete set null);
+
+create table boardingGate (
+   gateNum Number(5) constraint BG_NO_PK PRIMARY KEY,
+   gateStatus varchar2(10) constraint BG_CHK check (gateStatus IN ('available', 'busy')),
+   gateLoc varchar2(10) constraint BG_LOC_NN NOT NULL);
+
+create table Flight (
+   flightNum Number(5) constraint FLGT_NUM_PK PRIMARY KEY,
+   flightArrivalTime timestamp constraint FLGT_AT_NN NOT NULL,
+   flightDeptTime timestamp constraint AC_FLGT_DT NOT NULL,
+   flightStatus varchar2(10) constraint FLGT_CHK 
+        check (flightStatus IN ('delayed', 'diverted', 'boarding', 'landed', 'in flight')),
+   airlineID Number(5) constraint FLGT_AL_FK REFERENCES Airline(airlineID) on delete cascade,
+   gateNum Number(5) constraint FLGT_BG_FK REFERENCES boardingGate(gateNum) on delete set null);
+
+create table Staff (
+   staffID Number(10) constraint STF_ID_PK PRIMARY KEY,
+   staffNationality varchar2(25),
+   staffFirstName varchar2(25) constraint STF_FN_NN NOT NULL,
+   staffLastName varchar2(25) constraint STF_LN_NN NOT NULL,
+   staffDOB date,
+   staffJobType varchar2(10) constraint STF_CHK check (staffJobType IN ('airlineStaff', 'securityStaff',    'gateStaff')));
+
+create table airlineStaff (
+   staffID Number(10) constraint ASTF_ID_PK PRIMARY KEY,
+   airlineID Number(5) constraint ASTF_AL_FK REFERENCES Airline(airlineID) on delete cascade,
+   constraint ASTF_STF_FK FOREIGN KEY (staffID) REFERENCES Staff(staffID) on delete cascade);
+
+create table securityStaff (
+   staffID Number(10) constraint SEC_STF_PK PRIMARY KEY,
+   staffBadgeNum Number(5) constraint SS_BN_UNQ UNIQUE,
+   constraint SEC_STF_FK FOREIGN KEY (staffID) REFERENCES Staff(staffID) on delete cascade);
+
+create table gateStaff (
+   staffID Number(10) constraint GSTF_ID_PK PRIMARY KEY,
+   constraint GSTF_FK FOREIGN KEY (staffID) REFERENCES Staff(staffID) on delete cascade);
+
+create table VIPLounge (
+   VIP_ID Number(5) constraint VIP_ID_PK PRIMARY KEY,
+   VIP_Email varchar2(25),
+   VIP_Loc varchar2(10));
+
+create table GroundTransportation (
+   GTVehicleNum Number(8) constraint GT_NUM_PK PRIMARY KEY,
+   GTCarType varchar2(10),
+   DriverLicenseID varchar2(10) constraint GT_LICID_NN NOT NULL,
+   DriverName varchar2(25) constraint GT_NAME_NN NOT NULL,
+   GTReserveCost Number(3) constraint GT_COST_NN NOT NULL);
+
+create table Passenger (
+   passengerPassportID varchar2(15) constraint PAS_PNO_PK PRIMARY KEY,
+   passengerFirstName varchar2(25) constraint PAS_FN_NN NOT NULL,
+   passengerLastName varchar2(25) constraint PAS_LN_NN NOT NULL,
+   passengerDOB date,
+   GTVehicleNum Number(8) constraint PAS_GT_FK REFERENCES GroundTransportation (GTVehicleNum) on delete set 	null);
+
+create table Luggage (
+   luggID Number(10) constraint LUG_ID_PK PRIMARY KEY,
+   luggWeight Number(2),
+   luggStatus varchar2(10),
+   passengerPassportID varchar2(15) constraint LUG_PAS_FK REFERENCES Passenger(passengerPassportNum) on 		delete set null,
+   flightNum Number(5) constraint LUG_FLGT_FK REFERENCES flight(flightNum) on delete set null);
+
+create table reservedByPass (
+   passengerPassportID varchar2(15) constraint RES_PAS_FK REFERENCES Passenger(passengerPassportID) on delete 		cascade,
+   flightNum Number(5) constraint RES_FLGT_FK REFERENCES Flight(flightNum) on delete cascade,
+   constraint RES_PAS_FLGT_PK PRIMARY KEY (passengerPassportID, flightNum));
+
+create table passengerConInfo (
+   passengerPassportID varchar2(15) constraint PAS_CONINFO_FK REFERENCES Passenger(passengerPassportID) on 		delete cascade,
+   conInfo varchar2(25),
+   constraint RES_PAS_CONINFO_PK PRIMARY KEY (passengerPassportID, conInfo));
+
+create table VIPAccess (
+   VIP_ID Number(5) constraint ACC_VIP_ID_FK REFERENCES VIPLounge(VIP_ID) on delete cascade,
+   passengerPassportID constraint ACC_PAS_ID_FK REFERENCES Passenger(passengerPassportID) on delete cascade,
+   constraint ACC_VIP_PAS_PK PRIMARY KEY (VIP_ID, passengerPassportID));
+
+create table gateEmploys (
+   gateNum Number(5) constraint GATE_EMPS_FK REFERENCES boardingGate(gateNum) on delete set null,
+   staffID Number(10) constraint STF_EMPS_FK REFERENCES gateStaff(staffID) on delete cascade,
+   constraint GATE_STF_EMP_PK PRIMARY KEY (gateNum, staffID));
+

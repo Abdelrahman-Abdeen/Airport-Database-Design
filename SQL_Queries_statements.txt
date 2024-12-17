@@ -1,0 +1,16 @@
+<---------------- MODIFYING RECORDS ---------------->
+
+update luggage set luggstatus = 'Arrived' where luggid = 1;
+
+<---------------- DELETING A RECORD ---------------->
+
+delete from groundTransportation where GTVehicleNum = 28812419;
+
+<---------------- RETRIEVING RECORDS ---------------->
+
+select p.passengerpassportID, p.passengerfirstname, p.passengerlastname, f.flightnum,
+f.flightarrivaltime, f.flightdepttime from passenger p, flight f, reservedbypass rp where rp.passengerpassportid = p.passengerpassportid AND rp.flightnum = f.flightnum;
+
+select a.airlineName ,count(*) as "Number of Employees" from airline a, airlinestaff astf, staff s 
+where astf.staffid = s.staffid AND a.airlineid = astf.airlineid 
+group by (a.airlineName);

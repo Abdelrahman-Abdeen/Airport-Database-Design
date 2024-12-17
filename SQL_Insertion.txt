@@ -1,0 +1,158 @@
+<---------------- INSERTING 5 RECORDS INTO EACH TABLE ---------------->
+
+
+INSERT INTO Airline (airlineID, airlineName, airlineWebsite, AirlineHQ)
+VALUES (1, 'royal', 'www.royal.com', 'Jordan');
+INSERT INTO Airline (airlineID, airlineName, airlineWebsite, AirlineHQ)
+VALUES (2, 'dubai', 'www.dubai.com', 'UAE');
+INSERT INTO Airline (airlineID, airlineName, airlineWebsite, AirlineHQ)
+VALUES (3, 'Air France', 'www.airfrance.com', 'France');
+INSERT INTO Airline (airlineID, airlineName, airlineWebsite, AirlineHQ)
+VALUES (4, 'Emirates', 'www.emirates.com', 'UAE');
+INSERT INTO Airline (airlineID, airlineName, airlineWebsite, AirlineHQ)
+VALUES (5, 'Singapore Airlines', 'www.singaporeair.com', 'Singapore');
+
+INSERT INTO Aircraft (aircraftID, aircraftModel, aircraftCapacity, aircraftFuel, aircraftLastMaintenenceDate, airlineID)
+VALUES (1, 'Boeing 747', 400, 52, TO_DATE('01-01-2022', 'DD-MM-YYYY'), 1);
+INSERT INTO Aircraft (aircraftID, aircraftModel, aircraftCapacity, aircraftFuel, aircraftLastMaintenenceDate, airlineID)
+VALUES (2, 'Airbus A320', 200, 71, TO_DATE('01-02-2022', 'DD-MM-YYYY'), 2);
+INSERT INTO Aircraft (aircraftID, aircraftModel, aircraftCapacity, aircraftFuel, aircraftLastMaintenenceDate, airlineID)
+VALUES (3, 'Boeing 777', 350, 27, TO_DATE('01-03-2022', 'DD-MM-YYYY'), 3);
+INSERT INTO Aircraft (aircraftID, aircraftModel, aircraftCapacity, aircraftFuel, aircraftLastMaintenenceDate, airlineID)
+VALUES (4, 'Airbus A380', 500, 85, TO_DATE('01-04-2022', 'DD-MM-YYYY'), 4);
+INSERT INTO Aircraft (aircraftID, aircraftModel, aircraftCapacity, aircraftFuel, aircraftLastMaintenenceDate, airlineID)
+VALUES (5, 'Boeing 737', 150, 99, TO_DATE('01-05-2022', 'DD-MM-YYYY'), 5);
+
+INSERT INTO boardingGate (gateNum, gateLoc, gateStatus)
+VALUES (1, 'B105', 'available');
+INSERT INTO boardingGate (gateNum, gateLoc, gateStatus)
+VALUES (2, 'B102', 'busy');
+INSERT INTO boardingGate (gateNum, gateLoc, gateStatus)
+VALUES (3, 'A203', 'available');
+INSERT INTO boardingGate (gateNum, gateLoc, gateStatus)
+VALUES (4, 'C204', 'busy');
+INSERT INTO boardingGate (gateNum, gateLoc, gateStatus)
+VALUES (5, 'B203', 'available');
+
+INSERT INTO Flight (flightNum, flightDeptTime, flightArrivalTime, flightStatus, airlineID, gateNum)
+VALUES (101, TO_TIMESTAMP('10-01-2022 12:30:00', 'DD-MM-YYYY HH24:MI:SS'), TO_TIMESTAMP('10-01-2022 17:30:00', 'DD-MM-YYYY HH24:MI:SS'), 'landed', 1, 1);
+INSERT INTO Flight (flightNum, flightDeptTime, flightArrivalTime, flightStatus, airlineID, gateNum)
+VALUES (102, TO_TIMESTAMP('15-02-2022 14:10:00', 'DD-MM-YYYY HH24:MI:SS'), TO_TIMESTAMP('15-02-2022 18:30:00', 'DD-MM-YYYY HH24:MI:SS'), 'boarding', 2, 2);
+INSERT INTO Flight (flightNum, flightDeptTime, flightArrivalTime, flightStatus, airlineID, gateNum)
+VALUES (103, TO_TIMESTAMP('20-03-2022 12:00:00', 'DD-MM-YYYY HH24:MI:SS'), TO_TIMESTAMP('20-03-2022 14:30:00', 'DD-MM-YYYY HH24:MI:SS'), 'diverted', 3, 3);
+INSERT INTO Flight (flightNum, flightDeptTime, flightArrivalTime, flightStatus, airlineID, gateNum)
+VALUES (104, TO_TIMESTAMP('25-04-2022 13:00:00', 'DD-MM-YYYY HH24:MI:SS'), TO_TIMESTAMP('25-04-2022 15:40:00', 'DD-MM-YYYY HH24:MI:SS'), 'landed', 4, 4);
+INSERT INTO Flight (flightNum, flightDeptTime, flightArrivalTime, flightStatus, airlineID, gateNum)
+VALUES (105, TO_TIMESTAMP('29-05-2022 20:30:00', 'DD-MM-YYYY HH24:MI:SS'), TO_TIMESTAMP('30-05-2022 01:30:00', 'DD-MM-YYYY HH24:MI:SS'), 'in flight', 5, 5);
+
+INSERT INTO Staff (staffID, staffFirstName, staffLastName, staffNationality, staffDOB, staffJobType)
+VALUES (1, 'Omar', 'Abdullah', 'Jordan', TO_DATE('12-06-1980', 'DD-MM-YYYY'), 'airlineStaff');
+INSERT INTO Staff (staffID, staffFirstName, staffLastName, staffNationality, staffDOB, staffJobType)
+VALUES (2, 'Rand', 'Ali', 'Canada', TO_DATE('18-09-1985', 'DD-MM-YYYY'), 'securityStaff');
+INSERT INTO Staff (staffID, staffFirstName, staffLastName, staffNationality, staffDOB, staffJobType)
+VALUES (3, 'Sara', 'Mohammed', 'UK', TO_DATE('25-03-1990', 'DD-MM-YYYY'), 'gateStaff');
+INSERT INTO Staff (staffID, staffFirstName, staffLastName, staffNationality, staffDOB, staffJobType)
+VALUES (4, 'Ahmed', 'Kareem', 'Egypt', TO_DATE('08-12-1975', 'DD-MM-YYYY'), 'airlineStaff');
+INSERT INTO Staff (staffID, staffFirstName, staffLastName, staffNationality, staffDOB, staffJobType)
+VALUES (5, 'Maryam', 'Ossama', 'Syria', TO_DATE('14-02-1988', 'DD-MM-YYYY'), 'gateStaff');
+
+INSERT INTO airlineStaff (staffID, airlineID)
+VALUES (1, 3);
+INSERT INTO airlineStaff (staffID, airlineID)
+VALUES (2, 1);
+INSERT INTO airlineStaff (staffID, airlineID)
+VALUES (3, 3);
+INSERT INTO airlineStaff (staffID, airlineID)
+VALUES (4, 4);
+INSERT INTO airlineStaff (staffID, airlineID)
+VALUES (5, 1);
+
+INSERT INTO securityStaff (staffID, staffBadgeNum)
+VALUES (2, 32142);
+INSERT INTO securityStaff (staffID, staffBadgeNum)
+VALUES (4, 15251);
+INSERT INTO securityStaff (staffID, staffBadgeNum)
+VALUES (3, 42162);
+INSERT INTO securityStaff (staffID, staffBadgeNum)
+VALUES (1, 63721);
+INSERT INTO securityStaff (staffID, staffBadgeNum)
+VALUES (5, 72612);
+
+INSERT INTO gateStaff (staffID)
+VALUES (2);
+INSERT INTO gateStaff (staffID)
+VALUES (4);
+INSERT INTO gateStaff (staffID)
+VALUES (3);
+INSERT INTO gateStaff (staffID)
+VALUES (1);
+INSERT INTO gateStaff (staffID)
+VALUES (5);
+
+INSERT INTO VIPLounge(VIP_ID, VIP_Email, VIP_Loc) values (1, 'vip1@gmail.com','B102');
+INSERT INTO VIPLounge(VIP_ID, VIP_Email, VIP_Loc) values (2, 'vip2@gmail.com','B402');
+INSERT INTO VIPLounge(VIP_ID, VIP_Email, VIP_Loc) values (3, 'vip3@gmail.com','A103');
+INSERT INTO VIPLounge(VIP_ID, VIP_Email, VIP_Loc) values (4, 'vip4@gmail.com','C202');
+INSERT INTO VIPLounge(VIP_ID, VIP_Email, VIP_Loc) values (5, 'vip5@gmail.com','A304');
+
+INSERT INTO GroundTransportation (GTVehicleNum, GTCarType, DriverLicenseID, DriverName, GTReserveCost)
+VALUES (80132312,'Rental Car', 'R87821', 'Omar', 250);
+INSERT INTO GroundTransportation (GTVehicleNum, GTCarType, DriverLicenseID, DriverName, GTReserveCost)
+VALUES (28812419,'Shuttle', 'M21621', 'Moayad', 150);
+INSERT INTO GroundTransportation (GTVehicleNum, GTCarType, DriverLicenseID, DriverName, GTReserveCost)
+VALUES (90129621,'Taxi', 'Z71221', 'Ali', 100);
+INSERT INTO GroundTransportation (GTVehicleNum, GTCarType, DriverLicenseID, DriverName, GTReserveCost)
+VALUES (80123418,'Rental Car', 'N46921', 'Ibrahim', 300);
+INSERT INTO GroundTransportation (GTVehicleNum, GTCarType, DriverLicenseID, DriverName, GTReserveCost)
+VALUES (39220176,'Taxi', 'L71521', 'Khaled', 120);
+
+INSERT INTO Passenger (PassengerPassportID, passengerFirstName, passengerLastName, PassengerDOB, GTVehicleNum)
+VALUES (123456789012345, 'Noor', 'Jamal', TO_DATE('15-01-1990', 'DD-MM-YYYY'), 90129621);
+INSERT INTO Passenger (PassengerPassportID, passengerFirstName, passengerLastName, PassengerDOB, GTVehicleNum)
+VALUES (234567890123456, 'Ibraheem', 'Ameen', TO_DATE('20-05-1985', 'DD-MM-YYYY'), 39220176);
+INSERT INTO Passenger (PassengerPassportID, passengerFirstName, passengerLastName, PassengerDOB, GTVehicleNum)
+VALUES (345678901234567, 'Abderahman', 'Issa', TO_DATE('10-09-1995', 'DD-MM-YYYY'), 90129621);
+INSERT INTO Passenger (PassengerPassportID, passengerFirstName, passengerLastName, PassengerDOB, GTVehicleNum)
+VALUES (456789012345678, 'Abderahman', 'Abdeen', TO_DATE('05-03-1980', 'DD-MM-YYYY'), 28812419);
+INSERT INTO Passenger (PassengerPassportID, passengerFirstName, passengerLastName, PassengerDOB, GTVehicleNum)
+VALUES (567890123456789, 'Mais', 'Omar', TO_DATE('25-11-2000', 'DD-MM-YYYY'), 80123418);
+
+INSERT INTO luggage (luggID, luggWeight, luggStatus, PassengerPassportID, flightNum)
+VALUES (1, 20, 'Checked', 123456789012345, 101);
+INSERT INTO luggage (luggID, luggWeight, luggStatus, PassengerPassportID, flightNum)
+VALUES (2, 15, 'Carry-On', 234567890123456, 102);
+INSERT INTO luggage (luggID, luggWeight, luggStatus, PassengerPassportID, flightNum)
+VALUES (3, 25, 'Checked', 345678901234567, 103);
+INSERT INTO luggage (luggID, luggWeight, luggStatus, PassengerPassportID, flightNum)
+VALUES (4, 18, 'Carry-On', 456789012345678, 104);
+INSERT INTO luggage (luggID, luggWeight, luggStatus, PassengerPassportID, flightNum)
+VALUES (5, 22, 'Checked', 567890123456789, 105);
+
+INSERT INTO reservedByPass (passengerPassportID, flightNum) VALUES (345678901234567, 101);
+INSERT INTO reservedByPass (passengerPassportID, flightNum) VALUES (345678901234567, 103);
+INSERT INTO reservedByPass (passengerPassportID, flightNum) VALUES (567890123456789, 101);
+INSERT INTO reservedByPass (passengerPassportID, flightNum) VALUES (123456789012345, 102);
+INSERT INTO reservedByPass (passengerPassportID, flightNum) VALUES (567890123456789, 104);
+
+INSERT INTO PassengerConInfo (conInfo, PassengerPassportID)
+VALUES ('0792219252', 123456789012345);
+INSERT INTO PassengerConInfo (conInfo, PassengerPassportID)
+VALUES ('omar@hotmail.com', 123456789012345);
+INSERT INTO PassengerConInfo (conInfo, PassengerPassportID)
+VALUES ('0785643196', 345678901234567);
+INSERT INTO PassengerConInfo (conInfo, PassengerPassportID)
+VALUES ('0792466953', 345678901234567);
+INSERT INTO PassengerConInfo (conInfo, PassengerPassportID)
+VALUES ('omar@gmail.com', 456789012345678);
+
+INSERT INTO VIPAccess (VIP_ID, passengerPassportID) VALUES (1,456789012345678);
+INSERT INTO VIPAccess (VIP_ID, passengerPassportID) VALUES (2,456789012345678);
+INSERT INTO VIPAccess (VIP_ID, passengerPassportID) VALUES (5,456789012345678);
+INSERT INTO VIPAccess (VIP_ID, passengerPassportID) VALUES (2,345678901234567);
+INSERT INTO VIPAccess (VIP_ID, passengerPassportID) VALUES (4,123456789012345);
+
+INSERT INTO gateEmploys (gateNum, staffID) VALUES (1, 1);
+INSERT INTO gateEmploys (gateNum, staffID) VALUES (1, 2);
+INSERT INTO gateEmploys (gateNum, staffID) VALUES (1, 4);
+INSERT INTO gateEmploys (gateNum, staffID) VALUES (4, 2);
+INSERT INTO gateEmploys (gateNum, staffID) VALUES (3, 4);
